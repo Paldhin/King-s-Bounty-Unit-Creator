@@ -6,6 +6,20 @@ Note that TEST versions are not included. Only the final result of the testing w
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Version-1.1]
+
+### Added
+
+- Compilated file that allows easy execution of the file.
+
+### Removed
+
+- Talents file
+
+### Changed
+
+- README content
+
 ## [Version-1.0]
 
 ### Added
