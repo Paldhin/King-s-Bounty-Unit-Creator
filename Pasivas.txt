@@ -1,0 +1,222 @@
+hardened             La resistencia incrementa con el daño recibido.
+vengeful             La mitad de caídos genera críticos automáticos.
+shockShield          Contra-contra ataque con escudo, que genera daño reducido pero que aturde al enemigo.
+madFury              Doble de ataque e iniciativa con la mitad de caídos. Mitad de defensa, inmunidad a los hechizos mentales.
+ignoresPain          5% de resistencia a todos los tipos de daño cada vez que la unidad recibe daño de una fuente concreta. Capado al 25%.
+enchantedArmor       25% de resistencia física, 10% de resistencia ígnea, 20% de posibilidad de reducir el daño recibido a la mitad.
+daring               El ataque aumenta +2 por cada crítico. Capado en 10.
+elementalAxe         30% de congelar o aturdir enemigos cuerpo a cuerpo.
+shoulderToShoulder   10% de ataque y defensa para las unidades de nivel 1-4 adyacentes.
+cautious             Con el 30% de caídas, 30% de evitar ataques.
+singer               +1 Moral a los de su misma raza.
+armored              20% de resistencia física, 10% de resistencia ígnea.
+giftOfOdin           Unidades con liderazgo inferior no contraatacan.
+messangerOfTheGods   -10% de ataque y defensa a los enemigos adyacentes.
+beautiful            30% de probabilidad de esquivar un ataque de un enemigo humanoide.
+magicResistance      20% de resistencia mágica.
+bearCavalry          +1 de moral a osos.
+nimble               20% de esquivar un ataque.
+thrower              Alcance limitado a tres casillas.
+noMeleePenalty       Ataque a distancia igual al cuerpo a cuerpo.
+shooter              Alcance limitado a cinco casillas.
+accurate             Los ataques críticos tienen 20% de infligir debilidad (Ataque / 2).
+withingStaff         Un ataque tiene un 50% de probabilidad de arrebatar un efecto positivo.
+divineHand           El ataque aumenta +1 por cada ataque recibido por los aliados. Capado en 15.
+persistanceOfMind    Inmunidad a los hechizos mentales.
+elementalShield      Resistencia del 10% al fuego y al hielo.
+magicMissile         Ataque a distancia. Limitado a 6 casillas.
+worldOfSpirits       +30% de daño a No-muertos. Aumenta su moral al enfrentar No-Muertos. Su moral no queda penalizada por la presencia de No-Muertos.
+auraOfSupression     Los enemigos adyacentes de nivel inferior pierden uno de moral.
+teamSpirit           +1 de Ataque por cada unidad. Capado en +30.
+weedKiller           X2 de ataque contra espinos.
+robber               -1 moral a humanos.
+lightSteps           Mitad de daño de trampas.
+greedy               +10 moral al matar a un enemigo.
+commander            +1 de moral a espadachines y arqueros.
+steelArmor           30% de resistencia física.
+dragonSlayer         30% de resistencia ígnea. X2 de ataque contra dragones.
+mastery              La defensa aumenta un 30% por cada ataque recibido, hasta un 90%.
+horseman             10% de daño extra por cada casilla recorrida durante el ataque.
+fireResistance       20% de resistencia ígnea.
+arquero              El daño básico de la unidad es a distancia. Limitado a 6 casillas.
+holyWord             Ataque mágico limitado a 6 casillas. +50% de daño sagrado.
+trueBeliever         No pierde moral por la presencia de no-muertos.
+lightning            25% de posibilidad de paralizar al enemigo.
+antimagic            Resistencia mágica del 10% a aliados cercanos.
+holyWarrior          30% de resistencia mágica. x1,5 de daño contra No-Muertos y Demonios.
+highMage             +1 de moral a hechiceros.
+flamingArrow         30% de posibilidad de quemar al objetivo.
+fireProtection       50% de resistencia ígnea.
+fireKeeper           Por cada daño ígneo recibido, la unidad incrementa su ataque +1. Capado en 20.
+drunken              Aumenta la destreza de su equipamiento.
+nightSight           Su ataque aumenta un 50% en batallas oscuras.
+siegeGun             Su ataque se duplica contra otros objetos y armas de asedio.
+poisonProtection     25% de resistencia al veneno.
+acidSpray            Ataque que afecta a todas las unidades en tres casillas en línea recta. 15% de probabilidad de envenenar a los objetivos.
+likesEmerald         Su moral aumenta con la presencia de dragones esmeralda en el equipo.
+coldProtection       20% de resistencia al frío.
+foreman              Los mineros doblan su ataque y defensa.
+shock                30% de probabilidad de paralizar al enemigo.
+mecánico             80% de resistencia al veneno, 50% de resistencia mágica, inmune al envenenamiento, a la resurrección y a los hechizos mentales, sin moral.
+eyeless              Inmunidad a ceguera, precisión, y niebla aceitosa. Detecta criaturas invisibles.
+engineer             Precisión perfecta.
+sharpshooter         Alcance ilimitado.
+flight               Puede volar.
+fireThrower          Ataque que afecta a todas las unidades en tres casillas en línea recta. 15% de probabilidad de quemar a los objetivos.
+mechanic             Los droides ganan +5 de ataque y +1 de velocidad.
+fairyDust            30% de probabilidad de efectuar debilidad.
+suceptibleToFire     -50% de resistencia ígnea.
+oblivion             30% de probabilidad de desactivar los talentos del objetivo.
+blades               Reduce el ataque del enemigo al ser dañado.
+regeneration         Al inicio de cada turno, la unidad se regenera.
+tolerance            No pierde moral por los enemigos de su raza.
+vampireDespiser      +30% de daño a vampiros.
+beast                -10% de resistencia íngea, +10% de resistencia gélida.
+frenzy               20% de probabilidad de enloquecer al objetivo.
+lycanthrope          25% de probabilidad de convertir los daños a objetivos en poder para la unidad.
+hornOfLight          +30% de daño a No-Muertos y demonios.
+defenderOfBeauty     +2 de moral a driadas y hadas.
+bloodForBlood        Los contraataques a otras razas siempre son críticos.
+beauty               +30% de probabilidad de que el enemigo falle el atauqe.
+charm                20% de probabilidad de convertir en aliados a objetivos de nivel inferior a la unidad.
+woodFairy            +1 de moral a plantas y faunos.
+plant                -100% de resistencia al fuego, +50% de resistencia al veneno. Inmunidad al control mental.
+entangle             50% de probabilidad de ralentizar al objetivo.
+wooden               +10% de resistencia física.
+hunter               +50% de daño a animales.
+stingOfTheForest     Rango de ataque 6. Daño en área de 7 del 50%.
+auraOfHarmony        +1 de moral a elfos.
+enchancedProjectile  Rango de ataque 4. Reduce en -1 la defensa y ataque del objetivo.
+fearsDarkness        -2 de iniciativa en la oscuridad.
+spiritOfTheWood      Doble de ataque contra plantas, +2 de iniciativa a plantas y driadas, +4 de defensa a faunos
+firefly              30% de probabilidad de cegar al objetivo.
+creatureOfLight      Guerreros de la luz obtienen +1 moral.
+bowMaster            Las unidades aliadas con arcos obtienen +5 de ataque.
+revenge              Los contraataques son un 10% más fuertes.
+gigantKiller         20% de daño contra unidades de nivel 5.
+irascible            +1 de velocidad por ataque recibido.
+violent              Siempre hace críticos en los contraataques.
+counterattack        Puede realizar un segundo contraataque al ser contraatacado.
+thickSkin            10% de resistencia a todas las fuentes.
+heavyHand            50% de daño a unidades voladoras. Capacidad de reducir la velocidad del objetivo en -2.
+spiritWalker         +10% resistencia mágica.
+zeroingIn            +30% de ataque por nivel.
+recruiter            +2% de tropas a una unidad aleatoria de nivel inferior tras cada combate.
+naturalist           +1 de velocidad a los animales aliados.
+loner                +8 de ataque y defensa si no hay aliados cerca.
+devastate            25% de daño a la tropa detrás del objetivo.
+ghostAxes            Hechizo sin alcance límite que ignora las resistencias enemigas y un 10% de la defensa del enemigo por nivel de la unidad.
+demonlike            50% de resistencia íngea, -25% de resistencia al hielo, -50% a lo sagrado. +50% de Defensa en terrenos íngeos y -50% en helados.
+furious              Siempre contraataca
+domination           El ataque aumenta un 25% contra unidades de nivel inferior.
+demonRage            Posibilidad de obtener puntos de acción al resibir daño.
+threeHeaded          Ataque a los lados sin riesgo de contraataque.
+teleportation        Sin limite de movimiento ni reducción por obstaculos.
+powerOverFire        80% de resistencia al fuego.
+sunder               10% de probabilidad por nivel de matar a un 50% de las unidades objetivo de un ataque físico, siempre que el objetivo tenga menos liderazgo.
+strikeAndReturn      La unidad vuelve a su posición inicial después de asestar un golpe físico.
+terrify              30% de posibilidad de inflingir terror al asestar un golpe a unidades de nivel 1-4 inmunes al control mental.
+undead               50% de resistencia al veneno, 10% de resistencia al frío. +50% de ataque en la oscuridad, +1 de moral en cementerios. Inmune a efectos mentales.
+decaying             Cuando la unidad muere, todos las unidades adyacentes quedan infectadas con plaga.
+cursed               50% de posibilidad de debilitar al enemigo.
+bone                 -70% de daño de flechas, +30% de daño por armas de asedio o pesadas.
+phantom              50% de resistencia física y la capacidad de atravesar partes del terreno.
+soulDraining         30% del daño inflingido se transforma en vida para la unidad.
+fearOfTheLight       Si el combate tiene lugar durante el día, su ataque y defensa se reduce a la mitad.
+werewolfDespiser     +30% de daño a hombres lobo.
+vampirism            El 100% del daño causado se transforma en vida para la unidad.
+deathsDeception      Los ataques críticos fallan el 100% de las veces.
+risingFury           Con cada ataque, la fuerza de la unidad aumenta +3, hasta un máximo de 15.
+poisonBreath         La unidad emite un aliento venenoso que puede intoxicar a sus objetivos con un 50% de posibilidad.
+cloudOfDarkness      La unidad emite ataques en área que maldicen a sus objetivos. 50% de daño en área. 6 casillas de rango.
+excavator            +10% de oro en batallas en la superficie.
+cursedTrasureHunt    La unidad se dirije al cofre más cercano siempre que haya uno.
+marine               +1 de moral en los combates navales.
+elementallyVuln      -30% de resistencia gélida e ígnea.
+drainLife            La unidad recupera un 80% del daño causado en vida.
+magicImmunity        +80% de resistencia mágica.
+nightmares           Ataques a unidades de nivel inferior pueden causar miedo con un 30% de posibilidades. Al morir, la unidad deja un Zlong en su lugar.
+brutal               Doble de ataque al resibir daño por dos turnos.
+hibernation          La unidad se duerme si no se mueve. Se regenera tras un turno.
+stun                 25% de posibilidad de paralizar a un objetivo.
+freezeImmunity       Inmunidad a la congelación.
+underweller          50% de ataque en escenarios subterráneos.
+stoneSkin            +20% de resistencia física.
+poisonous            50% de posibilidad de envenenar al objetivo.
+immuneToPoison       80% de resistencia al veneno.
+vulnerableToCold     -20% de resistencia al hielo.
+flaming              Siempre se quema a los objetivos si es posible.
+reptile              +20% de resistencia al veneno, -20% de resistencia al hielo. -30% de ataque y defensa en entornos helados.
+snakeAgility         10% de posibilidades de esquivar un ataque enemigo.
+rabid                10% de posibilidades de enrabiar a un objetivo.
+horde                +1 de defensa y ataque por cada (30/nivel*5) hasta alcanzar un máximo de 10.
+scavenger            Pueden moverse hasta dos casillas más si hay un cuerpo cerca.
+frightening          30% de posibilidad de asustar al objetivo, siempre que esta sea de nivel ingerior.
+weakness             30% de posibilidades de debilitar al objetivo.
+paralyzes            50% (-10% por nivel) de sustraer al objetivo de puntos de acción.
+iceCreation          25% resistencia física, 50% al veneno, -100% al fuego, 80% al hielo, +50% de defensa en territorios nevados.
+splitsIce            Ataque con 5 de rango, que se basa en lanzar dardos de hielo con un 30% de probabilidades de congelar al objetivo.
+paralyzingRay        Rayo con la posibilidad de dormir a objetivos de nivel inferior. 100% de probabilidad a nivel 1, -25% por nivel.
+stone                +30% de resistencias físicas e ígneas, 60% al veneno.
+hatesGigants         x2 de daño a gigantes, -1 de moral si están en el ejército.
+dragonBreath         Ataque en dos casillas seguidas, 50% de posibilidad de quemar a los objetivos.
+immuneToFire         80% de resistencia al fuego.
+dragonPower          Los enemigos de nivel inferior tienen -1 de iniciativa.
+thornLeader          Los espinos cercanos aumentan +1 su iniciativa y velocidad.
+mageSlayer           +50% de daño a magos y unidades invocadas.
+restoration          Pierde los efectos negativos al principio de cada turno.
+servantOfDeath       Inmunidad a hechizos mentales (menos hipnósis, con el que se queda paralizado). Pierde todos los efectos positivos y negativos al instante.
+dragonDespiser       x2 de daño a dragones. -2 de moral si hay dragones cerca.
+regal                +1 de moral a humanos y grifos de nivel menor o igual.
+negatesMagic         25% de resistencia mágica. Rechaza todo tipo de efecto.
+trollSkin            Doble de defensa en la oscuridad. +1 de velocidad e iniciativa si hay luz.
+petrify              Al morir, la unidad deja una estatua en su posición.
+malevolent           La unidad aumenta su ataque +5 por cada enemigo que mata.
+flamingSkull         Ataque de rango cuatro que causa daño de fuego, +50% contra demonios.
+demonology           +1 de moral a demonios aliados. +5 de ataque en ambientes ígneos.
+enchantedMace        20% de probabilidad de robar vida del enemigo. 30% de probabilidad de congelar.
+boldness             +1 punto de acción si un aliado consigue un crítico.
+frostProof           15% de resistencia gélida.
+icing                Al morir, un pico de hielo sustituye a la unidad.
+freezingTouch        Los ataques físicos siempre congelan.
+creator              Al matar una unidad, se crean esbirros de hielo.
+claustrophobic       El ataque se reduce a la mitad bajo tierra.
+easyStep             Mitad de daño recibido por trampas.
+petrifyingEyes       Los ataques petrifican a los objetivos, aumentando su resistencia total un 40%, pero paralizándolo totalmente. 100% de probabilidad a niveles 1, -25% por nivel.
+masterOfSnakes       +1 de moral a otras serpientes. +5 de ataque y defensa por cada serpiente cercana. Las serpientes enemigas -1 de moral.
+bloodlust            50% de probabilidad de tener otro turno al matar a un enemigo.
+worm                 -10% de resistencia ígnea y física. 10% de resistencia venenosa.
+burrow               Ignora los obstaculos y pueden atacar a distancia.
+stationary           No se puede desplazar. Se puede teletransportar con hechizos.
+tripleHorned         Los ataques afectan a los enemigos a los lados, además de al central.
+spiked               Las unidades reciben daño al atacar al portador de esta habilidad (50% de la defensa).
+cannotCounter        No puede contraatacar.
+sharpBeak            Al recorrer dos casillas o más en línea recta, la unidad ejerce un crítico.
+tyrant               -30% de defensa a enemiogos cercanos de nivel inferior.
+giantLizardman       +1 de moral a otros hombres lagarto.
+terrible             50% de posibilidades de atterrar al enemigo, siempre que sea de nivel inferior.
+predator             La unidad devora el cadáver de su enemigo, recuperando vida.
+enchantedSpear       Los ataques penetran enemigos. Ignoran resistencias físicas.
+protector            Las unidades de nivel inferior de la misma raza obtienen +5 de ataque y +1 de iniciativa.
+daringInBattle       Al matar a una unidad, la unidad aumenta su daño +1 por cada nivel del enemigo. Capado en 25.
+fightingToDeath      Si se pierde el 50% de individuos de la unidad, o si no quedan más unidades, el límite en el número de contraataques desaparece.
+exorcistStaff        30% de posibilidad de infligir un efecto negativo aleatorio por tres turnos, siempre que el objetivo sea de nivel inferior.
+snowElf              25% de defensa en un campo nevado. -25% de ataque en escenarios volcánicos.
+battleMarks          Otros guerreros de la misma raza ganan +1 de iniciativa.
+alpha                Lobos, hienas y hombres lobo aliados obtienen +1 de moral.
+iceDevil             Si está en un ambiente nevado, no cuenta con límite de contraataques.
+senseOfDanger        +5 de defensa por cada enemigo en dos casillas de distancia.
+harbingerOfWinter    +1 de moral a elfos de la nieve.
+storm                Ataque a los lados del objetivo, con 50% de probabilidad de congelar o quemar a cada víctima.
+inspiration          Las unidades de nivel inferior de razas aliadas obtienen +1 de velocidad.
+ambushMaster         Las trampas aliadas hacen +10% de daño.
+sorcererStaff        Ataque a distancia, con 6 de rango, que crea un pico de hielo. +2 de ataque y defensa por cada ataque, hasta un máximo de 30.
+necroLizarman        50% de resistencia al veneno, 15% al hielo, -15% al fuego, -50% al sagrado. +50% de ataque en la oscuridad. Inmunidad a hechizos mentales.
+ancientRage          Por cada ataque recibido, el ataque de la unidad incrementa un 10%, hasta un 50%.
+cursedSpear          Los ataques penetran al enemigo e infligen debilidad.
+ruggedScales         Recibe la mitad de daño de ataques no mágicos. +15% de resistencia física.
+tirelessWarrior      +1 de moral a los hombres lagarto muertos.
+antimagicAura        Las unidades cercanas obtienen +10% de resistencia a la magia.
+sharpHones           Los ataques siempre infligen sangrado.
+widePlate            Los aliados cercanos de nivel inferior o igual ganan un 20% de defensa.
+wingsOfDarkness      +1 de moral a los no-muertos.
