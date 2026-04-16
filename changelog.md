@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
--
+- An error that prevented the user from consulting the units file.
+
 
 ## [ALPHA-1.0]
 
