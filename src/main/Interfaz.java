@@ -17,6 +17,13 @@ public class Interfaz extends JFrame {
     private final Utilidades utilidades = new Utilidades();
     private final JTextField nombreField = new JTextField(20);
     private final JTextArea outputArea = new JTextArea(20, 80);
+    private final JButton crearButton = new JButton("Crear unidad");
+    private final JButton verPasivasButton = new JButton("Ver pasivas");
+    private final JButton verUnidadesButton = new JButton("Ver unidades");
+    private final JButton guardarButton = new JButton("Guardar cambios");
+    private final JButton cancelarButton = new JButton("Cancelar edición");
+    private final JButton limpiarButton = new JButton("Limpiar salida");
+    private String editingFile = null;
 
     public Interfaz() {
         super("KingsBounty Unit Creator");
@@ -43,13 +50,11 @@ public class Interfaz extends JFrame {
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
-        JButton crearButton = new JButton("Crear unidad");
-        JButton verPasivasButton = new JButton("Ver pasivas");
-        JButton verUnidadesButton = new JButton("Ver unidades");
-        JButton limpiarButton = new JButton("Limpiar salida");
         buttonPanel.add(crearButton);
         buttonPanel.add(verPasivasButton);
         buttonPanel.add(verUnidadesButton);
+        buttonPanel.add(guardarButton);
+        buttonPanel.add(cancelarButton);
         buttonPanel.add(limpiarButton);
         controls.add(buttonPanel, gbc);
 
@@ -63,11 +68,27 @@ public class Interfaz extends JFrame {
         crearButton.addActionListener(e -> createUnit());
         verPasivasButton.addActionListener(e -> showFile("Pasivas.txt"));
         verUnidadesButton.addActionListener(e -> showFile("Unidades.txt"));
-        limpiarButton.addActionListener(e -> outputArea.setText(""));
+        guardarButton.addActionListener(e -> saveEdits());
+        cancelarButton.addActionListener(e -> cancelEdit());
+        limpiarButton.addActionListener(e -> {
+            outputArea.setText("");
+            cancelEdit();
+        });
 
+        setEditingMode(false);
         pack();
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(800, 500));
+    }
+
+    private void setEditingMode(boolean editing) {
+        crearButton.setVisible(!editing);
+        verPasivasButton.setVisible(!editing);
+        verUnidadesButton.setVisible(!editing);
+        guardarButton.setVisible(editing);
+        cancelarButton.setVisible(editing);
+        nombreField.setEnabled(!editing);
+        limpiarButton.setVisible(!editing);
     }
 
     private void createUnit() {
@@ -92,6 +113,7 @@ public class Interfaz extends JFrame {
             Path archivo = Paths.get(fileName);
             if (!Files.exists(archivo)) {
                 outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto.");
+                setEditingMode(false);
                 return;
             }
             String contenido;
@@ -101,9 +123,45 @@ public class Interfaz extends JFrame {
                 byte[] bytes = Files.readAllBytes(archivo);
                 contenido = new String(bytes, Charset.defaultCharset());
             }
-            outputArea.setText("Contenido de " + fileName + ":\n\n" + contenido);
+            if ("Unidades.txt".equals(fileName)) {
+                editingFile = fileName;
+                outputArea.setEditable(true);
+                setEditingMode(true);
+                outputArea.setText(contenido);
+            } else {
+                editingFile = null;
+                outputArea.setEditable(false);
+                setEditingMode(false);
+                outputArea.setText("Contenido de " + fileName + ":\n\n" + contenido);
+            }
         } catch (IOException ex) {
             showError("No se pudo leer el archivo '" + fileName + "'.", ex);
+        }
+    }
+
+    private void saveEdits() {
+        if (!"Unidades.txt".equals(editingFile)) {
+            outputArea.setText("No hay ninguna edición activa de 'Unidades.txt'.");
+            return;
+        }
+
+        try {
+            Files.writeString(Paths.get(editingFile), outputArea.getText(), StandardCharsets.UTF_8);
+            editingFile = null;
+            outputArea.setEditable(false);
+            setEditingMode(false);
+            outputArea.setText("Cambios guardados en Unidades.txt.\n\n" + outputArea.getText());
+        } catch (IOException ex) {
+            showError("No se pudo guardar 'Unidades.txt'.", ex);
+        }
+    }
+
+    private void cancelEdit() {
+        if (editingFile != null) {
+            editingFile = null;
+            outputArea.setEditable(false);
+            setEditingMode(false);
+            outputArea.setText("Edición cancelada. Use 'Ver unidades' para volver a cargar el archivo.");
         }
     }
 
