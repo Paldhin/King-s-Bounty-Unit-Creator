@@ -4,6 +4,7 @@ import clases.Unidad;
 import clases.Utilidades;
 import java.awt.*;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -93,7 +94,13 @@ public class Interfaz extends JFrame {
                 outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto.");
                 return;
             }
-            String contenido = Files.readString(archivo, StandardCharsets.UTF_8);
+            String contenido;
+            try {
+                contenido = Files.readString(archivo, StandardCharsets.UTF_8);
+            } catch (IOException utf8Ex) {
+                byte[] bytes = Files.readAllBytes(archivo);
+                contenido = new String(bytes, Charset.defaultCharset());
+            }
             outputArea.setText("Contenido de " + fileName + ":\n\n" + contenido);
         } catch (IOException ex) {
             showError("No se pudo leer el archivo '" + fileName + "'.", ex);
