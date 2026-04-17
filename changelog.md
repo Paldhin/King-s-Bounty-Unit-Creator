@@ -6,6 +6,19 @@ Note that TEST and PATCH versions are not included. Only the final result of the
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Version-2.4]
+
+### Changed
+
+- Pressing the "Enter" key toogles the "Create Unit" button.
+- When consulting the units file, pressing the "Enter" key toogles the "Save Changes" button.
+
+## [Version-2.3]
+
+### Added
+
+A Legacy branch which stores all .JAR of previous versions of the project. Only stores the final versions of the big updates, starting with version 2.2.
+
 ## [Version-2.2]
 
 ### Changed
