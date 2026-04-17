@@ -3,6 +3,7 @@ package main;
 import clases.Unidad;
 import clases.Utilidades;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +33,7 @@ public class Interfaz extends JFrame {
     private final JButton cancelarButton = new JButton("Cancelar edición");
     private final JButton limpiarButton = new JButton("Limpiar salida");
     private String editingFile = null;
+    private String originalFileContent = null;
 
     public Interfaz() {
         super("KingsBounty Unit Creator");
@@ -86,6 +88,7 @@ public class Interfaz extends JFrame {
         });
 
         setEditingMode(false);
+        setupEnterKey();
         pack();
         setLocationRelativeTo(null);
         setMinimumSize(new Dimension(800, 500));
@@ -100,6 +103,7 @@ public class Interfaz extends JFrame {
         cancelarButton.setVisible(editing);
         nombreField.setEnabled(!editing);
         limpiarButton.setVisible(!editing);
+        getRootPane().setDefaultButton(editing ? guardarButton : crearButton);
     }
 
     private void createUnit() {
@@ -125,18 +129,22 @@ public class Interfaz extends JFrame {
             String contenido = readFileOrResource(fileName);
             if ("Unidades.txt".equals(fileName)) {
                 editingFile = fileName;
+                originalFileContent = contenido;
                 outputArea.setEditable(true);
                 setEditingMode(true);
                 outputArea.setText(contenido);
                 outputArea.setCaretPosition(0);
             } else {
                 editingFile = null;
+                originalFileContent = null;
                 outputArea.setEditable(false);
                 setEditingMode(false);
                 outputArea.setText("Contenido de " + fileName + ":\n\n" + contenido);
                 outputArea.setCaretPosition(0);
             }
         } catch (IOException ex) {
+            editingFile = null;
+            originalFileContent = null;
             outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto ni en los recursos del JAR.");
             setEditingMode(false);
         }
@@ -196,11 +204,16 @@ public class Interfaz extends JFrame {
             return;
         }
 
+        if (hasUnsavedChanges() && !confirmProceed("guardar los cambios")) {
+            return;
+        }
+
         try {
             Path archivo = getWritePath(editingFile);
             Files.createDirectories(archivo.getParent());
             Files.writeString(archivo, outputArea.getText(), StandardCharsets.UTF_8);
             editingFile = null;
+            originalFileContent = null;
             outputArea.setEditable(false);
             setEditingMode(false);
             outputArea.setText("Cambios guardados en " + archivo + ".\n\n" + outputArea.getText());
@@ -210,13 +223,20 @@ public class Interfaz extends JFrame {
     }
 
     private void cancelEdit() {
-        if (editingFile != null) {
-            editingFile = null;
-            outputArea.setEditable(false);
-            setEditingMode(false);
-            outputArea.setText("Edición cancelada. Use 'Ver unidades' para volver a cargar el archivo.");
-            outputArea.setCaretPosition(0);
+        if (editingFile == null) {
+            return;
         }
+
+        if (hasUnsavedChanges() && !confirmProceed("descartar los cambios")) {
+            return;
+        }
+
+        editingFile = null;
+        originalFileContent = null;
+        outputArea.setEditable(false);
+        setEditingMode(false);
+        outputArea.setText("Edición cancelada. Use 'Ver unidades' para volver a cargar el archivo.");
+        outputArea.setCaretPosition(0);
     }
 
     private String getDefaultName() {
@@ -225,6 +245,46 @@ public class Interfaz extends JFrame {
                 "Fenris", "Galen", "Helena", "Ishar", "Jora"
         };
         return nombres[new Random().nextInt(nombres.length)];
+    }
+
+    private boolean hasUnsavedChanges() {
+        return editingFile != null && originalFileContent != null && !outputArea.getText().equals(originalFileContent);
+    }
+
+    private boolean confirmProceed(String actionDescription) {
+        int option = JOptionPane.showOptionDialog(
+                this,
+                "¿Seguro que quieres " + actionDescription + "?",
+                "Confirmar acción",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new String[]{"Sí", "Volver Atrás"},
+                "Volver Atrás"
+        );
+        return option == JOptionPane.YES_OPTION;
+    }
+
+    private void setupEnterKey() {
+        AbstractAction enterAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("Unidades.txt".equals(editingFile)) {
+                    saveEdits();
+                } else {
+                    createUnit();
+                }
+            }
+        };
+
+        JRootPane rootPane = getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+                .put(KeyStroke.getKeyStroke("ENTER"), "enterAction");
+        rootPane.getActionMap().put("enterAction", enterAction);
+
+        outputArea.getInputMap(JComponent.WHEN_FOCUSED)
+                .put(KeyStroke.getKeyStroke("ENTER"), "enterAction");
+        outputArea.getActionMap().put("enterAction", enterAction);
     }
 
     private void showError(String message, Exception ex) {
