@@ -12,6 +12,6 @@ For interested users (not developers), download the compilated "KingsBountyUnitC
 
 ## Future Plans
 
-- Add the Talents functionality from the King's Bounty saga.
 - Enhance the UI.
+- Add a searching funtion for the talents and pasives files.
 - Allow card creation with self selected images.
