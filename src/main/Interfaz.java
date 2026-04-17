@@ -19,6 +19,9 @@ import javax.swing.*;
 
 public class Interfaz extends JFrame {
     private final Utilidades utilidades = new Utilidades();
+    private static final String SOURCE_FILES_DIR = "src/Files";
+    private static final String RESOURCE_FILES_DIR = "Files";
+
     private final JTextField nombreField = new JTextField(20);
     private final JTextArea outputArea = new JTextArea(20, 80);
     private final JButton crearButton = new JButton("Crear unidad");
@@ -107,12 +110,13 @@ public class Interfaz extends JFrame {
 
         String unidadTexto = unidad.toFile().trim();
         try {
-            Path archivo = Paths.get("Unidades.txt");
+            Path archivo = getWritePath("Unidades.txt");
+            Files.createDirectories(archivo.getParent());
             Files.writeString(archivo, unidadTexto + System.lineSeparator(), StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            outputArea.setText("Unidad generada y guardada en Unidades.txt:\n\n" + unidad.toString());
+            outputArea.setText("Unidad generada y guardada en " + archivo + ":\n\n" + unidad.toString());
         } catch (IOException ex) {
-            showError("No se pudo guardar la unidad en Unidades.txt.", ex);
+            showError("No se pudo guardar la unidad.", ex);
         }
     }
 
@@ -139,8 +143,8 @@ public class Interfaz extends JFrame {
     }
 
     private String readFileOrResource(String fileName) throws IOException {
-        Path archivo = Paths.get(fileName);
-        if (Files.exists(archivo)) {
+        Path archivo = resolveRelativePath(fileName);
+        if (archivo != null && Files.exists(archivo)) {
             try {
                 return Files.readString(archivo, StandardCharsets.UTF_8);
             } catch (IOException utf8Ex) {
@@ -148,7 +152,7 @@ public class Interfaz extends JFrame {
                 return new String(bytes, Charset.defaultCharset());
             }
         }
-        try (InputStream resourceStream = getClass().getResourceAsStream("/" + fileName)) {
+        try (InputStream resourceStream = getClass().getResourceAsStream("/" + RESOURCE_FILES_DIR + "/" + fileName)) {
             if (resourceStream == null) {
                 throw new IOException("Resource not found: " + fileName);
             }
@@ -158,6 +162,34 @@ public class Interfaz extends JFrame {
         }
     }
 
+    private Path getWritePath(String fileName) {
+        Path existingPath = resolveRelativePath(fileName);
+        if (existingPath != null) {
+            return existingPath;
+        }
+        Path target = Paths.get(SOURCE_FILES_DIR, fileName);
+        if (Files.exists(target.getParent()) || !Files.exists(Paths.get(RESOURCE_FILES_DIR))) {
+            return target;
+        }
+        return Paths.get(RESOURCE_FILES_DIR, fileName);
+    }
+
+    private Path resolveRelativePath(String fileName) {
+        Path candidate = Paths.get(SOURCE_FILES_DIR, fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Paths.get(RESOURCE_FILES_DIR, fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Paths.get(fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        return null;
+    }
+
     private void saveEdits() {
         if (!"Unidades.txt".equals(editingFile)) {
             outputArea.setText("No hay ninguna edición activa de 'Unidades.txt'.");
@@ -165,11 +197,13 @@ public class Interfaz extends JFrame {
         }
 
         try {
-            Files.writeString(Paths.get(editingFile), outputArea.getText(), StandardCharsets.UTF_8);
+            Path archivo = getWritePath(editingFile);
+            Files.createDirectories(archivo.getParent());
+            Files.writeString(archivo, outputArea.getText(), StandardCharsets.UTF_8);
             editingFile = null;
             outputArea.setEditable(false);
             setEditingMode(false);
-            outputArea.setText("Cambios guardados en Unidades.txt.\n\n" + outputArea.getText());
+            outputArea.setText("Cambios guardados en " + archivo + ".\n\n" + outputArea.getText());
         } catch (IOException ex) {
             showError("No se pudo guardar 'Unidades.txt'.", ex);
         }

@@ -165,14 +165,14 @@ public class Unidad {
         HashMap<String, String> names = new HashMap<>();
         List<String> lines = null;
         try {
-            Path path = Path.of(fileName);
-            if (Files.exists(path)) {
+            Path path = resolveRelativePath(fileName);
+            if (path != null) {
                 lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             }
         } catch (IOException ignored) {
         }
         if (lines == null) {
-            try (InputStream resourceStream = Unidad.class.getResourceAsStream("/" + fileName)) {
+            try (InputStream resourceStream = Unidad.class.getResourceAsStream("/Files/" + fileName)) {
                 if (resourceStream != null) {
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
                         lines = new ArrayList<>();
@@ -202,6 +202,22 @@ public class Unidad {
             index++;
         }
         return names;
+    }
+
+    private static Path resolveRelativePath(String fileName) {
+        Path candidate = Path.of("src", "Files", fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Path.of("Files", fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Path.of(fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        return null;
     }
     
     /**

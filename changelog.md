@@ -6,6 +6,12 @@ Note that TEST and PATCH versions are not included. Only the final result of the
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Version-2.2]
+
+### Changed
+
+- Now, the file content has been moved to an independent folder for a better organization of the project. The file paths have been updated to reflect this change.
+
 ## [Version-2.1]
 
 ### Fixed
