@@ -19,6 +19,7 @@ public class Interfaz extends JFrame {
     private final JTextArea outputArea = new JTextArea(20, 80);
     private final JButton crearButton = new JButton("Crear unidad");
     private final JButton verPasivasButton = new JButton("Ver pasivas");
+    private final JButton verTalentosButton = new JButton("Ver talentos");
     private final JButton verUnidadesButton = new JButton("Ver unidades");
     private final JButton guardarButton = new JButton("Guardar cambios");
     private final JButton cancelarButton = new JButton("Cancelar edición");
@@ -37,21 +38,22 @@ public class Interfaz extends JFrame {
         JPanel controls = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(6, 6, 6, 6);
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        controls.add(new JLabel("Nombre opcional:"), gbc);
+        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        namePanel.add(new JLabel("Nombre opcional:"));
+        namePanel.add(nombreField);
+        controls.add(namePanel, gbc);
 
-        gbc.gridx = 1;
-        controls.add(nombreField, gbc);
-
-        gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
         buttonPanel.add(crearButton);
         buttonPanel.add(verPasivasButton);
+        buttonPanel.add(verTalentosButton);
         buttonPanel.add(verUnidadesButton);
         buttonPanel.add(guardarButton);
         buttonPanel.add(cancelarButton);
@@ -67,6 +69,7 @@ public class Interfaz extends JFrame {
 
         crearButton.addActionListener(e -> createUnit());
         verPasivasButton.addActionListener(e -> showFile("Pasivas.txt"));
+        verTalentosButton.addActionListener(e -> showFile("Talentos.txt"));
         verUnidadesButton.addActionListener(e -> showFile("Unidades.txt"));
         guardarButton.addActionListener(e -> saveEdits());
         cancelarButton.addActionListener(e -> cancelEdit());
@@ -84,6 +87,7 @@ public class Interfaz extends JFrame {
     private void setEditingMode(boolean editing) {
         crearButton.setVisible(!editing);
         verPasivasButton.setVisible(!editing);
+        verTalentosButton.setVisible(!editing);
         verUnidadesButton.setVisible(!editing);
         guardarButton.setVisible(editing);
         cancelarButton.setVisible(editing);
@@ -128,11 +132,13 @@ public class Interfaz extends JFrame {
                 outputArea.setEditable(true);
                 setEditingMode(true);
                 outputArea.setText(contenido);
+                outputArea.setCaretPosition(0);
             } else {
                 editingFile = null;
                 outputArea.setEditable(false);
                 setEditingMode(false);
                 outputArea.setText("Contenido de " + fileName + ":\n\n" + contenido);
+                outputArea.setCaretPosition(0);
             }
         } catch (IOException ex) {
             showError("No se pudo leer el archivo '" + fileName + "'.", ex);
@@ -162,6 +168,7 @@ public class Interfaz extends JFrame {
             outputArea.setEditable(false);
             setEditingMode(false);
             outputArea.setText("Edición cancelada. Use 'Ver unidades' para volver a cargar el archivo.");
+            outputArea.setCaretPosition(0);
         }
     }
 

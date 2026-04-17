@@ -6,6 +6,18 @@ Note that TEST versions are not included. Only the final result of the testing w
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Version-2.0]
+
+### Added
+
+- Talent funtionality.
+- Talent file is now chekable from the program itself.
+
+### Changed
+
+- Optional name field is now centered insted of alined towards the left.
+- Talents and pasive abilities are now sorted alphabetically. 
+
 ## [Version-1.1]
 
 ### Added

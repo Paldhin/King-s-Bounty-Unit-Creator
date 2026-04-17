@@ -1,0 +1,94 @@
+Attraction;             Permite enamorar tropas del sexo opuesto. Solo contra tropas del mismo o inferior nivel. 50% de éxito + 15% por diferencia de nivel.
+Backstabbing;           La unidad se teletransporta a la espalda del objetivo y la ataca.
+Berserker;              Dobla ataque y aumenta la velocidad en dos puntos. Reduce la defensa en un 50%
+Bless;                  La unidad objetivo recibe una bendición durante dos turnos que asegura el máximo daño posible con cada ataque.
+Blood Oath;             La tropa afectada recibe el doble de daño.
+Blood Thirst;           Aumenta el ataque en un 33% y los puntos de acción en 2.
+Btting Strike;          Golpe que permite saltarse una casilla.
+Cave Crumbling;         Destruye las hileras más lejanas del trablero.
+Cave Flood;             La unidad se teletransporta entre el agua del tablero.
+Change;                 Permite intercambiar la posición de dos tropas.
+Circle Attack;          Golpe circular que daña a todos los enemigos adyacentes.
+Cursed Arrow;           Flecha que transforma su daño en daño mágico. +50% de daño.
+Cursed Scream;          Ataque en área que aleja a las tropas adyacentes una casilla.
+Cursed Totem;           Totem que hace un 20% del daño medio de la tropa creadora en un área de dos casillas. Tiene el 15% de la vida de la tropa creadora.
+Death Arrise;           Resucita una tropa muerta con el 50% de su liderazgo original + 25% del liderazgo de la tropa ejecutadora.
+Demon Arena;            Efecto en área que duplica el ataque de los demonios en ella.
+Digging;                La tropa se esconde, aumentando su defensa en un 50% pero perdiendo la capacidad de moverse. Puede atacar bajo tierra a cualquier objetivo con un 70% de daño.
+Dispel;                 Elimina los efectos de la unidad objetivo.
+Double Attack;          Ataque que se efectúa en las casillas posteriores a la unidad.
+Double-Shot;            Doble disparo que hace el doble de daño. Sin efectos.
+Earthquake;             Ataca en todo el tablero, haciendo 50% menos de daño y perdiendo un 2% por cada casilla de distancia.
+Egg;                    Coloca un huevo con un 20% de la salud de la tropa madre. Tras dos turnos, saldrá una tropa de la misma raza con el 50% del liderazgo de la tropa madre.
+Elven Song;             +1 de moral a los elfos.
+Emerald Strike;         Atrae una tropa una casilla y la golpea.
+Figthing Trance;        Hechizo que duplica el daño pero que bloquea el uso de habilidades por dos turnos.
+Fire Potion;            Poción que hace daño de fuego en área. 50% de probabilidad de quemar al objetivo.
+Fire Strike;            Golpe de fuego que hace un 50% más de daño. 50% de probabilidad de quemar al objetivo.
+Fire Thread;            Ataque de fuego en línea que quema todo lo que atraviesa. 100% de probabilidad de quemar.
+Fire Whip;              Ataque de fuego en movimiento que quema todo lo que hay bajo él. 100% de probabilidad de quemar.
+Fireball;               Bola de fuego que hace daño en área. Daño máximo de la unidad. 33% de probabilidad de infilir quemadura + 3% por nivel.
+Flaming Strike;         La espada de fuego destruye las cuatro casillas más lejanas a la unidad.
+Flaming Sword;          Espada de fuego voladora que hace un daño del 5% de la vida del enemigo (+5% por diferencia de nivel). Ataca a los tres objetivos más fuertes.
+Flmaing Arrow;          Flecha de fuego que ejerce un 50% más de daño, además de poder quemar al objetivo con un 50% de probabilidad.
+Flooding;               Las tropas enemigas quedan con solo un punto de acción.
+Gift;                   La unidad objetivo recupera sus puntos de movimiento.
+Greed;                  Saquear un cadaver.
+Gremling;               Invoca una torre gremling.
+Guarding;               Hechizo que ataca a todas las tropas enemigas con el doble de daño.
+Hell Gate;              Ataque de fuego en área que hace el doble de daño a las unidades adyacentes, las empuja, las quema si puede, e invoca a seis tropas de demonios con un 33% del liderazgo de la tropa madre.
+Hitching;               Atrae a una tropa que esté a menos de 5 casillas a la tropa ejecutadora y la aturde haciendo el daño máximo (sin represalia).
+Holy Anger;             Da cinco puntos de furia, además de añadir a la unidad objetivo un bono del 50% de daño a demonios y del 100% a No-Muertos.
+Holy Water;             Poción que bendice en área. Doble de daño a los No-Muertos, 50% extra a los demonios.
+Hypnosis;               Hipnotiza a la tropa objetivo si esta es del mismo nivel o inferior, y si tiene el mismo o menos liderazgo. +1 turno por diferencia de nivel.
+Ice Arrow;              Flecha de hielo que reduce la iniciativa en un punto.
+Life Totem;             Totem que regenera un 200 de vida en un área de dos casillas. Tiene el 10% de la vida de la tropa creadora.
+Lullaby;                Duerme a la tropa objetivo si esta es de nivel inferior a la tropa ejecutadora.
+Magic Axes;             Ataque a distancia con un 50% de daño mágico extra.
+Magic Shackles;         Bloquea los talentos del objetivo. Solo contra unidades de nivel inferior o igual.
+Magic Shield;           Hechizo que protege a la unidad del 33% del daño recibido.
+Mana Pool;              Ataque en área que recupera maná. Porcentaje de mana recuperado = porcentaje de la tropa original asesinada por el ataque.
+Maturing;               Permite mejorar las stats de la tropa permanentemente. +25% a todas las stats.
+Mitosis;                La tropa se separa en dos.
+Plague;                 Todas las tropas del tablero reciben una reducción de vida, ataque y defensa del 33%.
+Posion Arrow;           Felcha que inflige veneno. 50% de probabilidad de envenenar.
+Posion Potion;          Poción que envenena en área. 50% de probabilidad de envenenar al objetivo.
+Predating;              Permite deborar el cadáver de una tropa, obteniendo el 10% de su salud.
+Preparation;            El próximo ataque será crítico.
+Procreation;            Permite la creación de gobots corrientes. 20% del liderazgo de la tropa madre.
+Push;                   Golpe que hace retroceder a la unidad una casilla.
+Rage;                   Duplica el ataque y la velocidad.
+Ragebait;               Enfurece a una tropa, que se vuelve incontrolable y solo ataca a su provocador durante un turno.
+Repair;                 Permite reparar a seres no vivos (como robots). Salud por punto de liderazgo: 5 * Nivel de la unidad.
+Resurrection;           Permite resucitar unidades caídas. Salud por punto de liderazgo: 1 * Nivel de la unidad.
+Return From Ashes;      La tropa revive al 100%. Solo se puede usar una vez por batalla.
+Running;                Aumenta el número de puntos de acción en dos.
+Sacred oath;            Regenera a las unidades adyacentes. Salud por punto de liderazgo: 4 * Nivel de la unidad
+Sacrifice;              Golpe que hace un 50% más de daño. Reinicia todos los talentos menos este.
+Sea attack;             Invoca dos ejércitos de peces demonios de las profundidades con el mismo liderazgo que la tropa madre.
+Siphon;                 Roba dos puntos de movimiento de una tropa.
+Sky Calling;            Llama a un grupo de ángeles guardianes con el 50% del liderazgo de la tropa original.
+Smashing Blow;          Golpe especial que hace un 50% más de daño.
+Spelling;               Invoca un hechizo aleatorio. La raza del ser marca el tipo de hechizo (caos, orden o distorsion).
+Spider rain;            Invoca dos ejércitos de arañas con el mismo liderazgo que la tropa madre.
+Stunning Clap;          Pandereta.
+Stunning Slider;        Golpe que salta una casilla y que aturde al objetivo.
+Stunning;               Golpe que aturde.
+Summon Bear;            Invoca un ejército de osos (50% del liderazgo de la tropa, +5% de liderazgo por nivel)
+Summon Thorns;          Invoca un ejército de espinos (50% del liderazgo de la tropa, +5% de liderazgo por nivel)
+Summon Wasps;           Permite reiniciar el talento "Wasp Swarm".
+Swamp Flood;            La unidad invoca cuatro ejércitos de hombres lagarto con el 50% del liderazgo de la tropa original.
+Swamp invasion;         Invoca dos tropas de serpientes con el mismo liderazgo que la tropa madre.
+Swamp Spell;            Ataca a todas las tropas enemigas del tablero con daño mágico.
+Swift;                  Duplica los puntos de movimiento.
+Telekinesis;            Hechizo que permite mover a una unidad a una casilla adyacente no ocupada.
+Thorn Procreation;      Permite crear espinos con el 50% del liderazgo de la tropa madre.
+Training;               Amaestra animales enemigos si estos tienen un 33% del liderazgo de la tropa (+5% de liderazgo por nivel)
+Transformation;         Permite alternar entre dos formas (depende de la unidad).
+Triple Attack;          Ataque que hace el triple de daño. Probabilidad de quemar del 25% (+3% por nivel). 
+Venom plague;           Daño en área venenoso. 75% de probabilidad de infligir veneno.
+Vineing;                Reduce la velocidad de todas las tropas en uno.
+Wasp Swarm;             Ataque de abejas. Mismo daño que el base.
+Webbing;                Paraliza una unidad.
+Whip Attack;            Ataque que se salta una casilla. +20% de daño.
+Wolf Cry;               Asusta a todas las tropas del tablero con nivel inferior a la tropa ejecutadora.

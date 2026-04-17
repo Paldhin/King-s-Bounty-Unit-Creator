@@ -35,7 +35,8 @@ public class Unidad {
     /**
      * Constructor de una unidad.
      */
-    private static final HashMap<String, String> pasivaNombres = loadPasivaNombres();
+    private static final HashMap<String, String> pasivaNombres = loadNameMap("Pasivas.txt");
+    private static final HashMap<String, String> talentoNombres = loadNameMap("Talentos.txt");
 
     public Unidad(){
         this.nombre = null;
@@ -76,6 +77,13 @@ public class Unidad {
         }
     }
 
+    public void AlterarTalentos(int num, Random random){
+        for (int i = 0; i < num; i++) {
+            int randomNum = random.nextInt(94) + 1;
+            this.talentos.replace(String.valueOf(randomNum), true);
+        }
+    }
+
     /**
      * @return Cadena de texto que imprime en pantalla la información de un objeto.
      */
@@ -97,7 +105,7 @@ public class Unidad {
                 "\n\tDaño Tipo = " + danoTipo +
                 "\n\tResistencia = " + resistencia +
                 "\n\tPasivas = " + HashMapToString(this.pasivas, "Ninguna", pasivaNombres) +
-                "\n\tTalentos = " + HashMapToString(this.talentos, "Ninguno");
+                "\n\tTalentos = " + HashMapToString(this.talentos, "Ninguno", talentoNombres);
     }
 
     /**
@@ -106,7 +114,7 @@ public class Unidad {
     public String toFile() {
         return "Nombre: " + nombre + "; Raza: " + raza + "; Nivel: " + level  + "; Precio: " + precio  + "; Liderazgo: " + liderazgo  + "; Ataque: " + ataque  + "; Defensa: " + defensa  +
                 "; Iniciativa: " +  iniciativa  + "; Velocidad: " + velocidad  + "; Vida: " +  vida + "; Daño: " + danoMinimo  + "-" + danoMaximo  + "; Tipo de daño: " + danoTipo  +
-                "; Resistencia: " + resistencia + "; Pasivas: (" + HashMapToString(pasivas, "Ninguna", pasivaNombres) + "); Talentos: (" + HashMapToString(talentos, "Ninguno") + ")";
+                "; Resistencia: " + resistencia + "; Pasivas: (" + HashMapToString(pasivas, "Ninguna", pasivaNombres) + "); Talentos: (" + HashMapToString(talentos, "Ninguno", talentoNombres) + ")";
     }
 
     public String HashMapToString(HashMap<String, Boolean> hashMap) {
@@ -150,10 +158,10 @@ public class Unidad {
         return first ? emptyValue : sb.toString();
     }
 
-    private static HashMap<String, String> loadPasivaNombres() {
+    private static HashMap<String, String> loadNameMap(String fileName) {
         HashMap<String, String> names = new HashMap<>();
         try {
-            List<String> lines = Files.readAllLines(Path.of("Pasivas.txt"), StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(Path.of(fileName), StandardCharsets.UTF_8);
             int index = 1;
             for (String line : lines) {
                 if (line == null || line.isBlank()) {
@@ -171,13 +179,6 @@ public class Unidad {
             // Si no se puede cargar, mantenemos nombres numéricos.
         }
         return names;
-    }
-
-    public void AlterarTalentos(int num, Random random){
-        for (int i = 0; i < num; i++) {
-            int randomNum = random.nextInt(222) + 1;
-            this.talentos.replace(String.valueOf(randomNum), true);
-        }
     }
     
     /**
