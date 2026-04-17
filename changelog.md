@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Note that TEST versions are not included. Only the final result of the testing will be cited in this file.
+Note that TEST and PATCH versions are not included. Only the final result of the testing will be cited in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
