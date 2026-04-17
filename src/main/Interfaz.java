@@ -3,7 +3,10 @@ package main;
 import clases.Unidad;
 import clases.Utilidades;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javax.swing.*;
 
 public class Interfaz extends JFrame {
@@ -114,19 +118,7 @@ public class Interfaz extends JFrame {
 
     private void showFile(String fileName) {
         try {
-            Path archivo = Paths.get(fileName);
-            if (!Files.exists(archivo)) {
-                outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto.");
-                setEditingMode(false);
-                return;
-            }
-            String contenido;
-            try {
-                contenido = Files.readString(archivo, StandardCharsets.UTF_8);
-            } catch (IOException utf8Ex) {
-                byte[] bytes = Files.readAllBytes(archivo);
-                contenido = new String(bytes, Charset.defaultCharset());
-            }
+            String contenido = readFileOrResource(fileName);
             if ("Unidades.txt".equals(fileName)) {
                 editingFile = fileName;
                 outputArea.setEditable(true);
@@ -141,7 +133,28 @@ public class Interfaz extends JFrame {
                 outputArea.setCaretPosition(0);
             }
         } catch (IOException ex) {
-            showError("No se pudo leer el archivo '" + fileName + "'.", ex);
+            outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto ni en los recursos del JAR.");
+            setEditingMode(false);
+        }
+    }
+
+    private String readFileOrResource(String fileName) throws IOException {
+        Path archivo = Paths.get(fileName);
+        if (Files.exists(archivo)) {
+            try {
+                return Files.readString(archivo, StandardCharsets.UTF_8);
+            } catch (IOException utf8Ex) {
+                byte[] bytes = Files.readAllBytes(archivo);
+                return new String(bytes, Charset.defaultCharset());
+            }
+        }
+        try (InputStream resourceStream = getClass().getResourceAsStream("/" + fileName)) {
+            if (resourceStream == null) {
+                throw new IOException("Resource not found: " + fileName);
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
+                return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+            }
         }
     }
 

@@ -6,6 +6,13 @@ Note that TEST versions are not included. Only the final result of the testing w
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Version-2.1]
+
+### Fixed
+
+- JAR is now updated to the last version.
+- JAR now includes the information files for it to be used without the need of recompilating the code.
+
 ## [Version-2.0]
 
 ### Added

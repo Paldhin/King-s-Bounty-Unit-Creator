@@ -1,6 +1,9 @@
 package clases;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -160,23 +163,43 @@ public class Unidad {
 
     private static HashMap<String, String> loadNameMap(String fileName) {
         HashMap<String, String> names = new HashMap<>();
+        List<String> lines = null;
         try {
-            List<String> lines = Files.readAllLines(Path.of(fileName), StandardCharsets.UTF_8);
-            int index = 1;
-            for (String line : lines) {
-                if (line == null || line.isBlank()) {
-                    continue;
-                }
-                int separator = line.indexOf(';');
-                String rawName = separator >= 0 ? line.substring(0, separator).trim() : line.trim();
-                if (rawName.isEmpty()) {
-                    continue;
-                }
-                names.put(String.valueOf(index), rawName);
-                index++;
+            Path path = Path.of(fileName);
+            if (Files.exists(path)) {
+                lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             }
-        } catch (IOException ex) {
-            // Si no se puede cargar, mantenemos nombres numéricos.
+        } catch (IOException ignored) {
+        }
+        if (lines == null) {
+            try (InputStream resourceStream = Unidad.class.getResourceAsStream("/" + fileName)) {
+                if (resourceStream != null) {
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
+                        lines = new ArrayList<>();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            lines.add(line);
+                        }
+                    }
+                }
+            } catch (IOException ignored) {
+            }
+        }
+        if (lines == null) {
+            return names;
+        }
+        int index = 1;
+        for (String line : lines) {
+            if (line == null || line.isBlank()) {
+                continue;
+            }
+            int separator = line.indexOf(';');
+            String rawName = separator >= 0 ? line.substring(0, separator).trim() : line.trim();
+            if (rawName.isEmpty()) {
+                continue;
+            }
+            names.put(String.valueOf(index), rawName);
+            index++;
         }
         return names;
     }
