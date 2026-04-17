@@ -331,24 +331,15 @@ public class Utilidades {
     }
 
     public void SetTalentos(Unidad unidad) {
-        int num = 0;
-        switch (unidad.getLevel()) {
-            case 1:
-                num = random.nextInt(2);
-                break;
-            case 2:
-                num = random.nextInt(2) + 1;
-                break;
-            case 3:
-                num = random.nextInt(3) + 1;
-                break;
-            case 4:
-                num = random.nextInt(4) + 1;
-                break;
-            case 5:
-                num = random.nextInt(5) + 2;
-                break;
-        }
+        int num;
+        int ran = random.nextInt(100) + 1;
+        if (ran <= 40) {
+            num = 0;
+        } else if (ran <= 65) {
+            num = 1;
+        } else if (ran <= 80) {
+            num = 2;
+        } else num = 3;
         unidad.AlterarTalentos(num, random);
     }
 }

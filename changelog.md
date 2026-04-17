@@ -1,10 +1,49 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Note that TEST versions are not included. Only the final result of the testing will be cited in this file.
+Note that TEST and PATCH versions are not included. Only the final result of the testing will be cited in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
+
+## [Version-2.2]
+
+### Changed
+
+- Now, the file content has been moved to an independent folder for a better organization of the project. The file paths have been updated to reflect this change.
+
+## [Version-2.1]
+
+### Fixed
+
+- JAR is now updated to the last version.
+- JAR now includes the information files for it to be used without the need of recompilating the code.
+
+## [Version-2.0]
+
+### Added
+
+- Talent funtionality.
+- Talent file is now chekable from the program itself.
+
+### Changed
+
+- Optional name field is now centered insted of alined towards the left.
+- Talents and pasive abilities are now sorted alphabetically. 
+
+## [Version-1.1]
+
+### Added
+
+- Compilated file that allows easy execution of the file.
+
+### Removed
+
+- Talents file
+
+### Changed
+
+- README content
 
 ## [Version-1.0]
 

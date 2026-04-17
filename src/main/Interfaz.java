@@ -3,7 +3,10 @@ package main;
 import clases.Unidad;
 import clases.Utilidades;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,14 +14,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javax.swing.*;
 
 public class Interfaz extends JFrame {
     private final Utilidades utilidades = new Utilidades();
+    private static final String SOURCE_FILES_DIR = "src/Files";
+    private static final String RESOURCE_FILES_DIR = "Files";
+
     private final JTextField nombreField = new JTextField(20);
     private final JTextArea outputArea = new JTextArea(20, 80);
     private final JButton crearButton = new JButton("Crear unidad");
     private final JButton verPasivasButton = new JButton("Ver pasivas");
+    private final JButton verTalentosButton = new JButton("Ver talentos");
     private final JButton verUnidadesButton = new JButton("Ver unidades");
     private final JButton guardarButton = new JButton("Guardar cambios");
     private final JButton cancelarButton = new JButton("Cancelar edición");
@@ -37,21 +45,22 @@ public class Interfaz extends JFrame {
         JPanel controls = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(6, 6, 6, 6);
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        controls.add(new JLabel("Nombre opcional:"), gbc);
+        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
+        namePanel.add(new JLabel("Nombre opcional:"));
+        namePanel.add(nombreField);
+        controls.add(namePanel, gbc);
 
-        gbc.gridx = 1;
-        controls.add(nombreField, gbc);
-
-        gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 0));
         buttonPanel.add(crearButton);
         buttonPanel.add(verPasivasButton);
+        buttonPanel.add(verTalentosButton);
         buttonPanel.add(verUnidadesButton);
         buttonPanel.add(guardarButton);
         buttonPanel.add(cancelarButton);
@@ -67,6 +76,7 @@ public class Interfaz extends JFrame {
 
         crearButton.addActionListener(e -> createUnit());
         verPasivasButton.addActionListener(e -> showFile("Pasivas.txt"));
+        verTalentosButton.addActionListener(e -> showFile("Talentos.txt"));
         verUnidadesButton.addActionListener(e -> showFile("Unidades.txt"));
         guardarButton.addActionListener(e -> saveEdits());
         cancelarButton.addActionListener(e -> cancelEdit());
@@ -84,6 +94,7 @@ public class Interfaz extends JFrame {
     private void setEditingMode(boolean editing) {
         crearButton.setVisible(!editing);
         verPasivasButton.setVisible(!editing);
+        verTalentosButton.setVisible(!editing);
         verUnidadesButton.setVisible(!editing);
         guardarButton.setVisible(editing);
         cancelarButton.setVisible(editing);
@@ -99,44 +110,84 @@ public class Interfaz extends JFrame {
 
         String unidadTexto = unidad.toFile().trim();
         try {
-            Path archivo = Paths.get("Unidades.txt");
+            Path archivo = getWritePath("Unidades.txt");
+            Files.createDirectories(archivo.getParent());
             Files.writeString(archivo, unidadTexto + System.lineSeparator(), StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-            outputArea.setText("Unidad generada y guardada en Unidades.txt:\n\n" + unidad.toString());
+            outputArea.setText("Unidad generada y guardada en " + archivo + ":\n\n" + unidad.toString());
         } catch (IOException ex) {
-            showError("No se pudo guardar la unidad en Unidades.txt.", ex);
+            showError("No se pudo guardar la unidad.", ex);
         }
     }
 
     private void showFile(String fileName) {
         try {
-            Path archivo = Paths.get(fileName);
-            if (!Files.exists(archivo)) {
-                outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto.");
-                setEditingMode(false);
-                return;
-            }
-            String contenido;
-            try {
-                contenido = Files.readString(archivo, StandardCharsets.UTF_8);
-            } catch (IOException utf8Ex) {
-                byte[] bytes = Files.readAllBytes(archivo);
-                contenido = new String(bytes, Charset.defaultCharset());
-            }
+            String contenido = readFileOrResource(fileName);
             if ("Unidades.txt".equals(fileName)) {
                 editingFile = fileName;
                 outputArea.setEditable(true);
                 setEditingMode(true);
                 outputArea.setText(contenido);
+                outputArea.setCaretPosition(0);
             } else {
                 editingFile = null;
                 outputArea.setEditable(false);
                 setEditingMode(false);
                 outputArea.setText("Contenido de " + fileName + ":\n\n" + contenido);
+                outputArea.setCaretPosition(0);
             }
         } catch (IOException ex) {
-            showError("No se pudo leer el archivo '" + fileName + "'.", ex);
+            outputArea.setText("El archivo '" + fileName + "' no existe en el directorio del proyecto ni en los recursos del JAR.");
+            setEditingMode(false);
         }
+    }
+
+    private String readFileOrResource(String fileName) throws IOException {
+        Path archivo = resolveRelativePath(fileName);
+        if (archivo != null && Files.exists(archivo)) {
+            try {
+                return Files.readString(archivo, StandardCharsets.UTF_8);
+            } catch (IOException utf8Ex) {
+                byte[] bytes = Files.readAllBytes(archivo);
+                return new String(bytes, Charset.defaultCharset());
+            }
+        }
+        try (InputStream resourceStream = getClass().getResourceAsStream("/" + RESOURCE_FILES_DIR + "/" + fileName)) {
+            if (resourceStream == null) {
+                throw new IOException("Resource not found: " + fileName);
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
+                return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+            }
+        }
+    }
+
+    private Path getWritePath(String fileName) {
+        Path existingPath = resolveRelativePath(fileName);
+        if (existingPath != null) {
+            return existingPath;
+        }
+        Path target = Paths.get(SOURCE_FILES_DIR, fileName);
+        if (Files.exists(target.getParent()) || !Files.exists(Paths.get(RESOURCE_FILES_DIR))) {
+            return target;
+        }
+        return Paths.get(RESOURCE_FILES_DIR, fileName);
+    }
+
+    private Path resolveRelativePath(String fileName) {
+        Path candidate = Paths.get(SOURCE_FILES_DIR, fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Paths.get(RESOURCE_FILES_DIR, fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Paths.get(fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        return null;
     }
 
     private void saveEdits() {
@@ -146,11 +197,13 @@ public class Interfaz extends JFrame {
         }
 
         try {
-            Files.writeString(Paths.get(editingFile), outputArea.getText(), StandardCharsets.UTF_8);
+            Path archivo = getWritePath(editingFile);
+            Files.createDirectories(archivo.getParent());
+            Files.writeString(archivo, outputArea.getText(), StandardCharsets.UTF_8);
             editingFile = null;
             outputArea.setEditable(false);
             setEditingMode(false);
-            outputArea.setText("Cambios guardados en Unidades.txt.\n\n" + outputArea.getText());
+            outputArea.setText("Cambios guardados en " + archivo + ".\n\n" + outputArea.getText());
         } catch (IOException ex) {
             showError("No se pudo guardar 'Unidades.txt'.", ex);
         }
@@ -162,6 +215,7 @@ public class Interfaz extends JFrame {
             outputArea.setEditable(false);
             setEditingMode(false);
             outputArea.setText("Edición cancelada. Use 'Ver unidades' para volver a cargar el archivo.");
+            outputArea.setCaretPosition(0);
         }
     }
 

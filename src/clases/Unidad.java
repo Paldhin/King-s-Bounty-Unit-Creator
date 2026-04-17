@@ -1,6 +1,9 @@
 package clases;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,7 +38,8 @@ public class Unidad {
     /**
      * Constructor de una unidad.
      */
-    private static final HashMap<String, String> pasivaNombres = loadPasivaNombres();
+    private static final HashMap<String, String> pasivaNombres = loadNameMap("Pasivas.txt");
+    private static final HashMap<String, String> talentoNombres = loadNameMap("Talentos.txt");
 
     public Unidad(){
         this.nombre = null;
@@ -76,6 +80,13 @@ public class Unidad {
         }
     }
 
+    public void AlterarTalentos(int num, Random random){
+        for (int i = 0; i < num; i++) {
+            int randomNum = random.nextInt(94) + 1;
+            this.talentos.replace(String.valueOf(randomNum), true);
+        }
+    }
+
     /**
      * @return Cadena de texto que imprime en pantalla la información de un objeto.
      */
@@ -97,7 +108,7 @@ public class Unidad {
                 "\n\tDaño Tipo = " + danoTipo +
                 "\n\tResistencia = " + resistencia +
                 "\n\tPasivas = " + HashMapToString(this.pasivas, "Ninguna", pasivaNombres) +
-                "\n\tTalentos = " + HashMapToString(this.talentos, "Ninguno");
+                "\n\tTalentos = " + HashMapToString(this.talentos, "Ninguno", talentoNombres);
     }
 
     /**
@@ -106,7 +117,7 @@ public class Unidad {
     public String toFile() {
         return "Nombre: " + nombre + "; Raza: " + raza + "; Nivel: " + level  + "; Precio: " + precio  + "; Liderazgo: " + liderazgo  + "; Ataque: " + ataque  + "; Defensa: " + defensa  +
                 "; Iniciativa: " +  iniciativa  + "; Velocidad: " + velocidad  + "; Vida: " +  vida + "; Daño: " + danoMinimo  + "-" + danoMaximo  + "; Tipo de daño: " + danoTipo  +
-                "; Resistencia: " + resistencia + "; Pasivas: (" + HashMapToString(pasivas, "Ninguna", pasivaNombres) + "); Talentos: (" + HashMapToString(talentos, "Ninguno") + ")";
+                "; Resistencia: " + resistencia + "; Pasivas: (" + HashMapToString(pasivas, "Ninguna", pasivaNombres) + "); Talentos: (" + HashMapToString(talentos, "Ninguno", talentoNombres) + ")";
     }
 
     public String HashMapToString(HashMap<String, Boolean> hashMap) {
@@ -150,34 +161,63 @@ public class Unidad {
         return first ? emptyValue : sb.toString();
     }
 
-    private static HashMap<String, String> loadPasivaNombres() {
+    private static HashMap<String, String> loadNameMap(String fileName) {
         HashMap<String, String> names = new HashMap<>();
+        List<String> lines = null;
         try {
-            List<String> lines = Files.readAllLines(Path.of("Pasivas.txt"), StandardCharsets.UTF_8);
-            int index = 1;
-            for (String line : lines) {
-                if (line == null || line.isBlank()) {
-                    continue;
-                }
-                int separator = line.indexOf(';');
-                String rawName = separator >= 0 ? line.substring(0, separator).trim() : line.trim();
-                if (rawName.isEmpty()) {
-                    continue;
-                }
-                names.put(String.valueOf(index), rawName);
-                index++;
+            Path path = resolveRelativePath(fileName);
+            if (path != null) {
+                lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             }
-        } catch (IOException ex) {
-            // Si no se puede cargar, mantenemos nombres numéricos.
+        } catch (IOException ignored) {
+        }
+        if (lines == null) {
+            try (InputStream resourceStream = Unidad.class.getResourceAsStream("/Files/" + fileName)) {
+                if (resourceStream != null) {
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))) {
+                        lines = new ArrayList<>();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            lines.add(line);
+                        }
+                    }
+                }
+            } catch (IOException ignored) {
+            }
+        }
+        if (lines == null) {
+            return names;
+        }
+        int index = 1;
+        for (String line : lines) {
+            if (line == null || line.isBlank()) {
+                continue;
+            }
+            int separator = line.indexOf(';');
+            String rawName = separator >= 0 ? line.substring(0, separator).trim() : line.trim();
+            if (rawName.isEmpty()) {
+                continue;
+            }
+            names.put(String.valueOf(index), rawName);
+            index++;
         }
         return names;
     }
 
-    public void AlterarTalentos(int num, Random random){
-        for (int i = 0; i < num; i++) {
-            int randomNum = random.nextInt(222) + 1;
-            this.talentos.replace(String.valueOf(randomNum), true);
+    private static Path resolveRelativePath(String fileName) {
+        Path candidate = Path.of("src", "Files", fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
         }
+        candidate = Path.of("Files", fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        candidate = Path.of(fileName);
+        if (Files.exists(candidate)) {
+            return candidate;
+        }
+        return null;
     }
     
     /**
