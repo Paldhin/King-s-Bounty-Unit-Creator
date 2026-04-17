@@ -6,7 +6,7 @@ Note that TEST and PATCH versions are not included. Only the final result of the
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [Version-2.2.1]
+## [Version-2.3]
 
 ### Added
 
