@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Pressing the "Enter" key toogles the "Create Unit" button.
 - When consulting the units file, pressing the "Enter" key toogles the "Save Changes" button.
+- When editing the units file, double verification will be needed in order to save or discard any changes.
 
 ## [Version-2.3]
 

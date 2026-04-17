@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -175,10 +176,12 @@ public class Interfaz extends JFrame {
         if (existingPath != null) {
             return existingPath;
         }
-        Path target = Paths.get(SOURCE_FILES_DIR, fileName);
-        if (Files.exists(target.getParent()) || !Files.exists(Paths.get(RESOURCE_FILES_DIR))) {
-            return target;
+
+        Path jarDir = getJarDirectory();
+        if (jarDir != null) {
+            return jarDir.resolve(RESOURCE_FILES_DIR).resolve(fileName);
         }
+
         return Paths.get(RESOURCE_FILES_DIR, fileName);
     }
 
@@ -195,7 +198,34 @@ public class Interfaz extends JFrame {
         if (Files.exists(candidate)) {
             return candidate;
         }
+        Path jarDir = getJarDirectory();
+        if (jarDir != null) {
+            candidate = jarDir.resolve(SOURCE_FILES_DIR).resolve(fileName);
+            if (Files.exists(candidate)) {
+                return candidate;
+            }
+            candidate = jarDir.resolve(RESOURCE_FILES_DIR).resolve(fileName);
+            if (Files.exists(candidate)) {
+                return candidate;
+            }
+            candidate = jarDir.resolve(fileName);
+            if (Files.exists(candidate)) {
+                return candidate;
+            }
+        }
         return null;
+    }
+
+    private Path getJarDirectory() {
+        try {
+            Path codeLocation = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+            if (Files.isDirectory(codeLocation)) {
+                return codeLocation;
+            }
+            return codeLocation.getParent();
+        } catch (URISyntaxException ex) {
+            return null;
+        }
     }
 
     private void saveEdits() {
